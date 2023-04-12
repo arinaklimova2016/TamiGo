@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="Theme.TamiGo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/tomato</item>
+        <item name="colorPrimaryVariant">@color/pink</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:statusBarColor">@color/tomato</item>
+    </style>
+</resources>

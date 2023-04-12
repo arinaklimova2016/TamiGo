@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TamiGo</string>
+    <string name="enter_name">Enter the name of your Tami</string>
+    <string name="start">Start</string>
+</resources>
