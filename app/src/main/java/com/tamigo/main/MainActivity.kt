@@ -5,11 +5,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.GravityCompat
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.PermissionController
 import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.StepsRecord
 import androidx.lifecycle.lifecycleScope
+import com.tamigo.R
 import com.tamigo.base.BaseActivity
 import com.tamigo.base.BindingInflation
 import com.tamigo.databinding.ActivityMainBinding
@@ -36,7 +38,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         requestPermissionActivityContract
     ) { granted ->
         if (granted.containsAll(permissions)) {
-            Toast.makeText(applicationContext, "Permission Granted launch", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Permission Granted launch", Toast.LENGTH_SHORT)
+                .show()
         } else {
             Toast.makeText(applicationContext, "Permission not Granted", Toast.LENGTH_SHORT).show()
         }
@@ -45,6 +48,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        binding.navigation.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.log_out -> {
+                    //TODO:Logic of navigation
+                }
+                R.id.settings_fragment -> {
+                    //TODO:Logic of navigation
+                }
+            }
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            return@setNavigationItemSelectedListener true
+        }
         router.attachTo(this)
         installSplashScreen().setKeepOnScreenCondition {
             mainViewModel.navigate()
@@ -69,7 +84,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             return
         }
         val healthConnectClient = HealthConnectClient.getOrCreate(applicationContext)
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             checkPermissionsAndRun(healthConnectClient)
         }
     }
