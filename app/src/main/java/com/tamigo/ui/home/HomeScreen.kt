@@ -7,6 +7,6 @@ class HomeScreen : Screen() {
     override val tag: String = HomeScreen::class.java.simpleName
 
     override fun execute(fragmentManager: FragmentManager) {
-        fragmentManager.replace(HomeFragment())
+        fragmentManager.replace(HomeFragment(), addToBackStack = false)
     }
 }

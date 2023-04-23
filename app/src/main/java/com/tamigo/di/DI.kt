@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.tamigo.main.MainViewModel
 import com.tamigo.main.MainViewModelImpl
+import com.tamigo.managers.HealthConnectManager
 import com.tamigo.navigation.MainRouter
 import com.tamigo.navigation.Router
 import com.tamigo.preferences.Preferences
@@ -33,9 +34,15 @@ val prefsRepositoryModule = module {
 }
 
 val viewModelModule = module {
-    viewModel<HomeViewModel> { HomeViewModelImpl(get(), get()) }
+    viewModel<HomeViewModel> { HomeViewModelImpl(get(), get(), get()) }
     viewModel<RegistrationViewModel> { RegistrationViewModelImpl(get(), get()) }
-    viewModel<MainViewModel> { MainViewModelImpl(get(), get()) }
+    viewModel<MainViewModel> { MainViewModelImpl(get(), get(), get()) }
+}
+
+val managersModule = module {
+    single {
+        HealthConnectManager(androidApplication())
+    }
 }
 
 private fun getSharedPreferences(context: Context): SharedPreferences {
@@ -45,5 +52,6 @@ private fun getSharedPreferences(context: Context): SharedPreferences {
 val appModules = arrayListOf(
     navigationModule,
     prefsRepositoryModule,
-    viewModelModule
+    viewModelModule,
+    managersModule
 )

@@ -7,6 +7,6 @@ class RegistrationScreen : Screen() {
     override val tag: String = RegistrationScreen::class.java.simpleName
 
     override fun execute(fragmentManager: FragmentManager) {
-        fragmentManager.replace(RegistrationFragment())
+        fragmentManager.replace(RegistrationFragment(), addToBackStack = false)
     }
 }

@@ -28,7 +28,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         with(binding) {
             txtName.text = homeViewModel.getTamiName()
             skin.setImageResource(homeViewModel.getTamiSkin())
+            homeViewModel.currentSteps.observe(viewLifecycleOwner) {
+                txtCurrentSteps.text = it.toString()
+            }
+            btnTarget.setOnClickListener {
+                homeViewModel.getSteps()
+            }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.recordSteps()
     }
 
 }

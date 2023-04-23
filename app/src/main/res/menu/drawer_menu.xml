@@ -3,15 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/log_out"
-            android:icon="@drawable/app_logo"
-            android:title="Log out"
+            android:id="@+id/home"
+            android:title="@string/home"
+            app:showAsAction="withText|ifRoom" />
+        <item
+            android:id="@+id/settings"
+            android:title="@string/settings"
             app:showAsAction="withText|ifRoom" />
 
         <item
-            android:id="@+id/settings_fragment"
-            android:icon="@drawable/app_logo"
-            android:title="settigs"
+            android:id="@+id/info"
+            android:title="@string/info"
+            app:showAsAction="withText|ifRoom" />
+
+        <item
+            android:id="@+id/restart"
+            android:title="@string/restart"
             app:showAsAction="withText|ifRoom" />
     </group>
 </menu>

@@ -2,4 +2,11 @@
     <string name="app_name">TamiGo</string>
     <string name="enter_name">Enter the name of your Tami</string>
     <string name="start">Start</string>
+    <string name="slash">/</string>
+    <string name="targets">targets</string>
+    <string name="your_current_target">Your current target</string>
+    <string name="info">Info</string>
+    <string name="restart">Restart</string>
+    <string name="settings">Settings</string>
+    <string name="home">Home</string>
 </resources>
