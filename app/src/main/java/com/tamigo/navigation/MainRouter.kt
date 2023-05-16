@@ -9,7 +9,7 @@ import androidx.lifecycle.LifecycleOwner
 
 class MainRouter : Router {
     private var fragmentManager: FragmentManager? = null
-    private val autodetacher: ActivityLifecycleDetacher? = null
+    private val autoDetacher: ActivityLifecycleDetacher? = null
 
     override fun attachTo(host: Any) {
         if (fragmentManager != null) {
@@ -50,7 +50,7 @@ class MainRouter : Router {
     }
 
     override fun detach() {
-        autodetacher?.release()
+        autoDetacher?.release()
         fragmentManager = null
     }
 

@@ -9,4 +9,13 @@
     <string name="restart">Restart</string>
     <string name="settings">Settings</string>
     <string name="home">Home</string>
+    <string name="shop">Shop</string>
+    <string name="prize">Prize:</string>
+    <string name="get">Get</string>
+    <string name="number_of_steps">Number of steps: </string>
+    <string name="choose">Choose</string>
+    <string name="are_you_agree">Are you agree?</string>
+    <string name="warning">If you have an incomplete goal, the data will be lost.</string>
+    <string name="agree">Agree</string>
+    <string name="cancel">Cancel</string>
 </resources>

@@ -1,31 +1,27 @@
 package com.tamigo.viewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.tamigo.managers.HealthConnectManager
 import com.tamigo.navigation.MainRouter
 import com.tamigo.preferences.Preferences
 import com.tamigo.ui.registration.RegistrationScreen
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.tamigo.ui.shop.ShopScreen
+import com.tamigo.ui.targets.TargetsScreen
 
 abstract class HomeViewModel : ViewModel() {
-    abstract val currentSteps: LiveData<Long>
+
     abstract fun getTamiName(): String
     abstract fun getTamiSkin(): Int
     abstract fun navigateToRegistrationScreen()
-    abstract fun getSteps()
-    abstract fun recordSteps()
+    abstract fun openTargetsFragment()
+    abstract fun openShopFragment()
+    abstract fun getCoins(): String
 }
 
 class HomeViewModelImpl(
     private val preferences: Preferences,
     private val router: MainRouter,
-    private val healthConnectManager: HealthConnectManager
 ) : HomeViewModel() {
-    override val currentSteps = MutableLiveData<Long>()
+
     override fun getTamiName(): String {
         return preferences.getTamiName() ?: "Tami"
     }
@@ -38,16 +34,16 @@ class HomeViewModelImpl(
         router.navigate(RegistrationScreen())
     }
 
-    override fun getSteps() {
-        viewModelScope.launch(Dispatchers.IO) {
-            currentSteps.postValue(healthConnectManager.getSteps())
-        }
+    override fun openTargetsFragment() {
+        router.navigate(TargetsScreen())
     }
 
-    override fun recordSteps() {
-        viewModelScope.launch(Dispatchers.IO) {
-            healthConnectManager.insertData(123)
-        }
+    override fun openShopFragment() {
+        router.navigate(ShopScreen())
+    }
+
+    override fun getCoins(): String {
+        return preferences.getCoinsBalance().toString()
     }
 
 }

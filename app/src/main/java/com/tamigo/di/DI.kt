@@ -9,10 +9,7 @@ import com.tamigo.navigation.MainRouter
 import com.tamigo.navigation.Router
 import com.tamigo.preferences.Preferences
 import com.tamigo.preferences.PreferencesImpl
-import com.tamigo.viewModel.HomeViewModel
-import com.tamigo.viewModel.HomeViewModelImpl
-import com.tamigo.viewModel.RegistrationViewModel
-import com.tamigo.viewModel.RegistrationViewModelImpl
+import com.tamigo.viewModel.*
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
@@ -34,9 +31,10 @@ val prefsRepositoryModule = module {
 }
 
 val viewModelModule = module {
-    viewModel<HomeViewModel> { HomeViewModelImpl(get(), get(), get()) }
+    viewModel<HomeViewModel> { HomeViewModelImpl(get(), get()) }
     viewModel<RegistrationViewModel> { RegistrationViewModelImpl(get(), get()) }
     viewModel<MainViewModel> { MainViewModelImpl(get(), get(), get()) }
+    viewModel<TargetsViewModel> { TargetsViewModelImpl(get(), get()) }
 }
 
 val managersModule = module {

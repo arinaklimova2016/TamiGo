@@ -8,12 +8,15 @@ import com.tamigo.R
 import com.tamigo.base.BaseActivity
 import com.tamigo.base.BindingInflation
 import com.tamigo.databinding.ActivityMainBinding
+import com.tamigo.interfase.UpdateCoinsListener
 import com.tamigo.managers.HealthConnectManager
 import com.tamigo.navigation.Router
+import com.tamigo.ui.home.HomeFragment
+import com.tamigo.ui.home.HomeScreen
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : BaseActivity<ActivityMainBinding>(), UpdateCoinsListener {
     override val bindingInflation: BindingInflation<ActivityMainBinding> =
         ActivityMainBinding::inflate
     private val router by inject<Router>()
@@ -52,5 +55,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
 
         mainViewModel.navigate()
+    }
+
+    override fun onUpdateCoinsBalance() {
+        val homeFragment = supportFragmentManager
+            .findFragmentByTag(HomeScreen().tag) as HomeFragment
+        homeFragment.updateCoinsBalance()
     }
 }

@@ -25,13 +25,13 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/ui_coin"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="@+id/coin_balance"
+        app:layout_constraintEnd_toStartOf="@+id/coin_balance"
+        app:layout_constraintTop_toTopOf="@+id/coin_balance"
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/coin_balance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/oxford_blue"
@@ -81,7 +81,7 @@
         app:layout_constraintEnd_toStartOf="@+id/progress_health"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/progress_health"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <ProgressBar
         android:id="@+id/progress_health"
@@ -96,85 +96,39 @@
         app:layout_constraintStart_toEndOf="@id/ic_health"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/card_challenge"
+    <FrameLayout
+        android:id="@+id/home_fragment_container"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:background="@drawable/ui_background_border_pink"
-        android:padding="16dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_shop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progress_health">
-
-        <TextView
-            android:id="@+id/txt_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/your_current_target"
-            android:textColor="@color/oxford_blue"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txt_current_steps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="6dp"
-            android:textColor="@color/oxford_blue"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_description"
-            tools:text="5000" />
-
-        <TextView
-            android:id="@+id/txt_slash"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="6dp"
-            android:text="@string/slash"
-            android:textColor="@color/oxford_blue"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_current_steps"
-            app:layout_constraintStart_toEndOf="@id/txt_current_steps"
-            app:layout_constraintTop_toTopOf="@id/txt_current_steps" />
-
-        <TextView
-            android:id="@+id/txt_target_steps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="6dp"
-            android:textColor="@color/oxford_blue"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_slash"
-            app:layout_constraintStart_toEndOf="@id/txt_slash"
-            app:layout_constraintTop_toTopOf="@id/txt_slash"
-            tools:text="10000" />
-
-        <ProgressBar
-            android:id="@+id/progress_target"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="0dp"
-            android:layout_height="10dp"
-            android:layout_marginVertical="10dp"
-            android:max="100"
-            android:min="0"
-            android:progressDrawable="@drawable/progress_target"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_current_steps" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/ic_health"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btn_target"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="200dp"
+        android:minWidth="150dp"
         android:minHeight="50dp"
         android:text="@string/targets"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_shop"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btn_shop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="150dp"
+        android:minHeight="50dp"
+        android:text="@string/shop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btn_target"
+        tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

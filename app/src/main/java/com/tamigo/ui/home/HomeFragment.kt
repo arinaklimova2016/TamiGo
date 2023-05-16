@@ -25,21 +25,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        homeViewModel.openTargetsFragment()
         with(binding) {
             txtName.text = homeViewModel.getTamiName()
             skin.setImageResource(homeViewModel.getTamiSkin())
-            homeViewModel.currentSteps.observe(viewLifecycleOwner) {
-                txtCurrentSteps.text = it.toString()
-            }
             btnTarget.setOnClickListener {
-                homeViewModel.getSteps()
+                homeViewModel.openTargetsFragment()
             }
+            btnShop.setOnClickListener {
+                homeViewModel.openShopFragment()
+            }
+            coinBalance.text = homeViewModel.getCoins()
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        homeViewModel.recordSteps()
+    fun updateCoinsBalance() {
+        binding.coinBalance.text = homeViewModel.getCoins()
     }
 
 }
