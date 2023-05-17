@@ -14,7 +14,10 @@ interface Preferences {
     fun setTarget(target: Target)
     fun getTarget(): Target?
     fun setCoinsToBalance(coins: Int)
+    fun removeCoinsFromBalance(coins: Int)
     fun getCoinsBalance(): Int
+    fun setProducts(products: String)
+    fun getProducts(): String?
 }
 
 class PreferencesImpl(
@@ -57,8 +60,24 @@ class PreferencesImpl(
         }
     }
 
+    override fun removeCoinsFromBalance(coins: Int) {
+        prefs.edit {
+            putInt(COINS_BALANCE, prefs.getInt(COINS_BALANCE, 0) - coins)
+        }
+    }
+
     override fun getCoinsBalance(): Int {
         return prefs.getInt(COINS_BALANCE, 0)
+    }
+
+    override fun setProducts(products: String) {
+        prefs.edit {
+            putString(PRODUCTS, products)
+        }
+    }
+
+    override fun getProducts(): String? {
+        return prefs.getString(PRODUCTS, "[{}]")
     }
 
     companion object {
@@ -68,5 +87,6 @@ class PreferencesImpl(
         const val TAMI_SKIN = "tami_skin"
         const val TARGET = "target"
         const val COINS_BALANCE = "coins_balance"
+        const val PRODUCTS = "products_inventory"
     }
 }

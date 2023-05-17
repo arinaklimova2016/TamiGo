@@ -35,6 +35,7 @@ val viewModelModule = module {
     viewModel<RegistrationViewModel> { RegistrationViewModelImpl(get(), get()) }
     viewModel<MainViewModel> { MainViewModelImpl(get(), get(), get()) }
     viewModel<TargetsViewModel> { TargetsViewModelImpl(get(), get()) }
+    viewModel<ShopViewModel> { ShopViewModelImpl(get()) }
 }
 
 val managersModule = module {

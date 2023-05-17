@@ -1,6 +1,7 @@
 package com.tamigo.constant
 
 import com.tamigo.R
+import com.tamigo.data.FoodItem
 import com.tamigo.data.Target
 
 object Constants {
@@ -32,5 +33,20 @@ object Constants {
         Target(25000, 250),
         Target(50000, 500),
         Target(100000, 1000)
+    )
+
+    val shopList = listOf(
+        FoodItem(R.drawable.food_strawberry, 15, 5),
+        FoodItem(R.drawable.food_banana, 15, 5),
+        FoodItem(R.drawable.food_tomato, 15, 5),
+        FoodItem(R.drawable.food_coke, 30, 10),
+        FoodItem(R.drawable.food_orange_juice, 30, 10),
+        FoodItem(R.drawable.food_chicken, 60, 25),
+        FoodItem(R.drawable.food_soup, 60, 25),
+        FoodItem(R.drawable.food_noodles, 60, 25),
+        FoodItem(R.drawable.food_burger, 100, 50),
+        FoodItem(R.drawable.food_pizza, 100, 50),
+        FoodItem(R.drawable.food_cake, 200, 100),
+        FoodItem(R.drawable.food_cookie, 200, 100)
     )
 }
