@@ -9,6 +9,7 @@ import com.tamigo.managers.HealthConnectManager
 import com.tamigo.preferences.Preferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.ZonedDateTime
 
 abstract class TargetsViewModel : ViewModel() {
     abstract val currentSteps: LiveData<Long>
@@ -32,6 +33,8 @@ class TargetsViewModelImpl(
 
     override fun setTarget(target: Target) {
         preferences.setTarget(target)
+        preferences.setStartTargetTime(ZonedDateTime.now())
+        getSteps()
     }
 
     override fun getTarget(): Target? {

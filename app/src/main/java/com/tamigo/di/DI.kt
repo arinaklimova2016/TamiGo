@@ -40,7 +40,7 @@ val viewModelModule = module {
 
 val managersModule = module {
     single {
-        HealthConnectManager(androidApplication())
+        HealthConnectManager(androidApplication(), get())
     }
 }
 

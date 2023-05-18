@@ -6,10 +6,6 @@
             android:id="@+id/home"
             android:title="@string/home"
             app:showAsAction="withText|ifRoom" />
-        <item
-            android:id="@+id/settings"
-            android:title="@string/settings"
-            app:showAsAction="withText|ifRoom" />
 
         <item
             android:id="@+id/info"

@@ -103,7 +103,7 @@ class ShopFragment : BaseFragment<FragmentShopBinding>() {
     }
 
     companion object {
-        private const val AGREE_BUY = "Are you willing to buy this product?"
-        private const val AGREE_USE = "Are you willing to use this product?"
+        private const val AGREE_BUY = "Чи бажаєте ви купити цей продукт?"
+        private const val AGREE_USE = "Чи бажаєте ви використати цей продукт?"
     }
 }

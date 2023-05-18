@@ -5,6 +5,7 @@ import androidx.core.content.edit
 import com.google.gson.Gson
 import com.tamigo.R
 import com.tamigo.data.Target
+import java.time.ZonedDateTime
 
 interface Preferences {
     fun setTamiName(name: String)
@@ -20,6 +21,8 @@ interface Preferences {
     fun getProducts(): String?
     fun setFirstLaunch(isFirst: Boolean)
     fun isFirstLaunch(): Boolean
+    fun setStartTargetTime(now: ZonedDateTime)
+    fun getStartTargetTime(): String?
 }
 
 class PreferencesImpl(
@@ -92,6 +95,16 @@ class PreferencesImpl(
         return prefs.getBoolean(FIRST_LAUNCH, true)
     }
 
+    override fun setStartTargetTime(now: ZonedDateTime) {
+        prefs.edit {
+            putString(START_TARGET, now.toString())
+        }
+    }
+
+    override fun getStartTargetTime(): String? {
+        return prefs.getString(START_TARGET, "")
+    }
+
     companion object {
         const val KEY = "tami_prefs"
 
@@ -101,5 +114,6 @@ class PreferencesImpl(
         const val COINS_BALANCE = "coins_balance"
         const val PRODUCTS = "products_inventory"
         const val FIRST_LAUNCH = "is_first_launch"
+        const val START_TARGET = "time_when_start_target"
     }
 }

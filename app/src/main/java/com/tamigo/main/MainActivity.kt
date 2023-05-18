@@ -12,6 +12,7 @@ import com.tamigo.interfase.UpdateCoinsListener
 import com.tamigo.interfase.UpdateHealthListener
 import com.tamigo.managers.HealthConnectManager
 import com.tamigo.navigation.Router
+import com.tamigo.ui.dialog.ConfirmationDialog
 import com.tamigo.ui.home.HomeFragment
 import com.tamigo.ui.home.HomeScreen
 import org.koin.android.ext.android.inject
@@ -35,16 +36,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), UpdateCoinsListener,
         binding.navigation.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
-                    //TODO:Logic of navigation
-                }
-                R.id.settings -> {
-                    //TODO:Logic of navigation
+                    mainViewModel.navigateToHome()
                 }
                 R.id.info -> {
-                    //TODO:Logic of navigation
+                    mainViewModel.navigateInfo()
                 }
                 R.id.restart -> {
-                    //TODO:Logic of navigation
+                    openConfirmationDialog()
                 }
             }
             binding.drawerLayout.closeDrawer(GravityCompat.START)
@@ -69,5 +67,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), UpdateCoinsListener,
         val homeFragment =
             supportFragmentManager.findFragmentByTag(HomeScreen().tag) as HomeFragment
         homeFragment.updateHealthProgress(value)
+    }
+
+    private fun openConfirmationDialog() {
+        ConfirmationDialog {
+            mainViewModel.onClickRestart()
+        }.show(supportFragmentManager, ConfirmationDialog.TAG)
     }
 }

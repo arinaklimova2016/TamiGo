@@ -22,7 +22,7 @@ class TargetsFragment : BaseFragment<FragmentTargetsBinding>() {
         FragmentTargetsBinding::inflate
     private val viewModel: TargetsViewModel by viewModel()
 
-    private var target = MutableLiveData<Target>()
+    private var target = MutableLiveData<Target?>()
     private var updateCoinsListener: UpdateCoinsListener? = null
 
     override fun onCreateView(
@@ -37,16 +37,16 @@ class TargetsFragment : BaseFragment<FragmentTargetsBinding>() {
         super.onViewCreated(view, savedInstanceState)
         target.value = viewModel.getTarget()
         with(binding) {
-            btnGetPrize.isEnabled = false
             viewModel.currentSteps.observe(viewLifecycleOwner) {
                 txtCurrentSteps.text = it.toString()
                 progressTarget.progress = getProgress(it, target.value?.steps).toInt()
-                if (it.toString() >= target.value?.steps.toString()) {
-                    btnGetPrize.isEnabled = true
-                }
+                if (it == 0L)
+                    btnGetPrize.isEnabled = false
+                else
+                    btnGetPrize.isEnabled = it.toString() >= target.value?.steps.toString()
             }
             target.observe(viewLifecycleOwner) {
-                txtTargetSteps.text = it.steps.toString()
+                txtTargetSteps.text = (it?.steps ?: "0").toString()
             }
 
             targetsList.adapter = TargetsAdapter(

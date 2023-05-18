@@ -1,7 +1,6 @@
 package com.tamigo.ui.home
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import com.tamigo.base.BaseFragment
 import com.tamigo.base.BindingInflation
 import com.tamigo.databinding.FragmentHomeBinding
 import com.tamigo.interfase.UpdateServiceListener
-import com.tamigo.service.HealthService
 import com.tamigo.viewModel.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,8 +29,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        if (homeViewModel.isNeedStartService()) {
-            val intent = Intent(requireContext(), HealthService::class.java)
-            requireContext().startService(intent)
+//            val intent = Intent(requireContext(), HealthService::class.java)
+//            requireContext().startService(intent)
 //        }
         homeViewModel.currentHealth.observe(viewLifecycleOwner) {
             binding.progressHealth.progress = it.toInt()

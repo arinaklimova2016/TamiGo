@@ -10,6 +10,7 @@ import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.StepsRecord
 import androidx.health.connect.client.request.ReadRecordsRequest
 import androidx.health.connect.client.time.TimeRangeFilter
+import com.tamigo.preferences.Preferences
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,8 @@ import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 
 class HealthConnectManager(
-    private val context: Context
+    private val context: Context,
+    private val preferences: Preferences
 ) {
     private var activity: ComponentActivity? = null
     private var permissionRequest: SuspendActivityResultLauncher? = null
@@ -50,30 +52,16 @@ class HealthConnectManager(
         checkPermissions(healthConnectClient)
     }
 
-    suspend fun insertData(steps: Long) {
-
-        val startTime = ZonedDateTime.now().minusSeconds(1).toInstant()
-        val endTime = ZonedDateTime.now().toInstant()
-
-        val records = listOf(
-            StepsRecord(
-                count = steps,
-                startTime = startTime,
-                endTime = endTime,
-                startZoneOffset = null,
-                endZoneOffset = null,
-            )
-        )
-        val healthConnectClient = HealthConnectClient.getOrCreate(context)
-        healthConnectClient.insertRecords(records)
-    }
-
     suspend fun getSteps(): Long {
-        val today = ZonedDateTime.now()
-        val startOfDay = today.truncatedTo(ChronoUnit.DAYS)
+        val now = ZonedDateTime.now()
+        val startTargetTime: ZonedDateTime = try {
+            ZonedDateTime.parse(preferences.getStartTargetTime())
+        } catch (e: java.lang.Exception) {
+            now.truncatedTo(ChronoUnit.DAYS)
+        }
         val timeRangeFilter = TimeRangeFilter.between(
-            startOfDay.toLocalDateTime(),
-            today.toLocalDateTime()
+            startTargetTime.toLocalDateTime(),
+            now.toLocalDateTime()
         )
 
         val stepsRecordRequest = ReadRecordsRequest(StepsRecord::class, timeRangeFilter)
