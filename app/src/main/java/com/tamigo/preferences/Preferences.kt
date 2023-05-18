@@ -18,6 +18,8 @@ interface Preferences {
     fun getCoinsBalance(): Int
     fun setProducts(products: String)
     fun getProducts(): String?
+    fun setFirstLaunch(isFirst: Boolean)
+    fun isFirstLaunch(): Boolean
 }
 
 class PreferencesImpl(
@@ -80,6 +82,16 @@ class PreferencesImpl(
         return prefs.getString(PRODUCTS, "[{}]")
     }
 
+    override fun setFirstLaunch(isFirst: Boolean) {
+        prefs.edit {
+            putBoolean(FIRST_LAUNCH, isFirst)
+        }
+    }
+
+    override fun isFirstLaunch(): Boolean {
+        return prefs.getBoolean(FIRST_LAUNCH, true)
+    }
+
     companion object {
         const val KEY = "tami_prefs"
 
@@ -88,5 +100,6 @@ class PreferencesImpl(
         const val TARGET = "target"
         const val COINS_BALANCE = "coins_balance"
         const val PRODUCTS = "products_inventory"
+        const val FIRST_LAUNCH = "is_first_launch"
     }
 }

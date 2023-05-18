@@ -14,6 +14,7 @@ import com.tamigo.constant.Constants.shopList
 import com.tamigo.data.FoodItem
 import com.tamigo.databinding.FragmentShopBinding
 import com.tamigo.interfase.UpdateCoinsListener
+import com.tamigo.interfase.UpdateHealthListener
 import com.tamigo.ui.adapter.FoodAdapter
 import com.tamigo.ui.adapter.FoodAdapter.Companion.INVENTORY_VIEW_HOLDER
 import com.tamigo.ui.adapter.FoodAdapter.Companion.SHOP_VIEW_HOLDER
@@ -27,6 +28,7 @@ class ShopFragment : BaseFragment<FragmentShopBinding>() {
 
     private val viewModel: ShopViewModel by viewModel()
     private var updateCoinsListener: UpdateCoinsListener? = null
+    private var updateHealthListener: UpdateHealthListener? = null
 
     private val inventory = MutableLiveData<List<FoodItem>?>()
 
@@ -66,6 +68,7 @@ class ShopFragment : BaseFragment<FragmentShopBinding>() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         updateCoinsListener = context as? UpdateCoinsListener
+        updateHealthListener = context as? UpdateHealthListener
     }
 
     override fun onResume() {
@@ -76,6 +79,7 @@ class ShopFragment : BaseFragment<FragmentShopBinding>() {
     override fun onDetach() {
         super.onDetach()
         updateCoinsListener = null
+        updateHealthListener = null
     }
 
     private fun openConfirmationDialog(title: String, foodItem: FoodItem) {
@@ -91,6 +95,7 @@ class ShopFragment : BaseFragment<FragmentShopBinding>() {
                 }
                 AGREE_USE -> {
                     viewModel.removeProductFromInventory(foodItem)
+                    updateHealthListener?.updateHealth(foodItem.healthRecovery)
                     inventory.value = viewModel.getProductsFromInventory()
                 }
             }
