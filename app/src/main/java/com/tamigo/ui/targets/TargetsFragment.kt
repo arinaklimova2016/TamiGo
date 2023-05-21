@@ -11,11 +11,11 @@ import com.tamigo.base.BindingInflation
 import com.tamigo.databinding.FragmentTargetsBinding
 import com.tamigo.ui.adapter.TargetsAdapter
 import com.tamigo.ui.dialog.ConfirmationDialog
-import com.tamigo.viewModel.TargetsViewModel
+import com.tamigo.utils.constant.Constants
+import com.tamigo.utils.data.Target
+import com.tamigo.utils.interfase.UpdateCoinsListener
+import com.tamigo.utils.viewModel.TargetsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.tamigo.constant.Constants
-import com.tamigo.data.Target
-import com.tamigo.interfase.UpdateCoinsListener
 
 class TargetsFragment : BaseFragment<FragmentTargetsBinding>() {
     override val bindingInflation: BindingInflation<FragmentTargetsBinding> =

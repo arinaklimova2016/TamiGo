@@ -1,4 +1,4 @@
-package com.tamigo.managers
+package com.tamigo.utils.managers
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,7 @@ import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.StepsRecord
 import androidx.health.connect.client.request.ReadRecordsRequest
 import androidx.health.connect.client.time.TimeRangeFilter
-import com.tamigo.preferences.Preferences
+import com.tamigo.utils.preferences.Preferences
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

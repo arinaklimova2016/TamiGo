@@ -1,8 +1,8 @@
-package com.tamigo.constant
+package com.tamigo.utils.constant
 
 import com.tamigo.R
-import com.tamigo.data.FoodItem
-import com.tamigo.data.Target
+import com.tamigo.utils.data.FoodItem
+import com.tamigo.utils.data.Target
 
 object Constants {
     val tamiList = listOf(
@@ -49,4 +49,7 @@ object Constants {
         FoodItem(R.drawable.food_cake, 200, 100),
         FoodItem(R.drawable.food_cookie, 200, 100)
     )
+
+    const val MINUS_HEALTH_INTENT = "MINUS_HEALTH_INTENT"
+    const val PLUS_HEALTH_INTENT = "PLUS_HEALTH_INTENT"
 }

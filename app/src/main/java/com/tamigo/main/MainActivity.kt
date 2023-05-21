@@ -8,9 +8,8 @@ import com.tamigo.R
 import com.tamigo.base.BaseActivity
 import com.tamigo.base.BindingInflation
 import com.tamigo.databinding.ActivityMainBinding
-import com.tamigo.interfase.UpdateCoinsListener
-import com.tamigo.interfase.UpdateHealthListener
-import com.tamigo.managers.HealthConnectManager
+import com.tamigo.utils.interfase.UpdateCoinsListener
+import com.tamigo.utils.managers.HealthConnectManager
 import com.tamigo.navigation.Router
 import com.tamigo.ui.dialog.ConfirmationDialog
 import com.tamigo.ui.home.HomeFragment
@@ -18,8 +17,7 @@ import com.tamigo.ui.home.HomeScreen
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity<ActivityMainBinding>(), UpdateCoinsListener,
-    UpdateHealthListener {
+class MainActivity : BaseActivity<ActivityMainBinding>(), UpdateCoinsListener {
     override val bindingInflation: BindingInflation<ActivityMainBinding> =
         ActivityMainBinding::inflate
     private val router by inject<Router>()
@@ -36,7 +34,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), UpdateCoinsListener,
         binding.navigation.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
-                    mainViewModel.navigateToHome()
+                    mainViewModel.navigate()
                 }
                 R.id.info -> {
                     mainViewModel.navigateInfo()
@@ -61,12 +59,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), UpdateCoinsListener,
         val homeFragment = supportFragmentManager
             .findFragmentByTag(HomeScreen().tag) as HomeFragment
         homeFragment.updateCoinsBalance()
-    }
-
-    override fun updateHealth(value: Int) {
-        val homeFragment =
-            supportFragmentManager.findFragmentByTag(HomeScreen().tag) as HomeFragment
-        homeFragment.updateHealthProgress(value)
     }
 
     private fun openConfirmationDialog() {

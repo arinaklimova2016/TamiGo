@@ -1,34 +1,41 @@
-package com.tamigo.ui.shop
+package com.tamigo.ui.food
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.tamigo.R
 import com.tamigo.base.BaseFragment
 import com.tamigo.base.BindingInflation
-import com.tamigo.constant.Constants.shopList
-import com.tamigo.data.FoodItem
 import com.tamigo.databinding.FragmentShopBinding
-import com.tamigo.interfase.UpdateCoinsListener
-import com.tamigo.interfase.UpdateHealthListener
 import com.tamigo.ui.adapter.FoodAdapter
 import com.tamigo.ui.adapter.FoodAdapter.Companion.INVENTORY_VIEW_HOLDER
 import com.tamigo.ui.adapter.FoodAdapter.Companion.SHOP_VIEW_HOLDER
 import com.tamigo.ui.dialog.PurchaseDialog
+import com.tamigo.utils.constant.Constants.PLUS_HEALTH_INTENT
+import com.tamigo.utils.constant.Constants.shopList
+import com.tamigo.utils.data.FoodItem
+import com.tamigo.utils.interfase.UpdateCoinsListener
+import com.tamigo.utils.receivers.HealthReceiver
+import com.tamigo.utils.receivers.HealthReceiver.Companion.PLUS_HEALTH
+import com.tamigo.utils.viewModel.ShopViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.tamigo.viewModel.ShopViewModel
 
-class ShopFragment : BaseFragment<FragmentShopBinding>() {
+class FoodFragment : BaseFragment<FragmentShopBinding>() {
     override val bindingInflation: BindingInflation<FragmentShopBinding> =
         FragmentShopBinding::inflate
 
     private val viewModel: ShopViewModel by viewModel()
     private var updateCoinsListener: UpdateCoinsListener? = null
-    private var updateHealthListener: UpdateHealthListener? = null
 
     private val inventory = MutableLiveData<List<FoodItem>?>()
 
@@ -68,7 +75,6 @@ class ShopFragment : BaseFragment<FragmentShopBinding>() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         updateCoinsListener = context as? UpdateCoinsListener
-        updateHealthListener = context as? UpdateHealthListener
     }
 
     override fun onResume() {
@@ -79,7 +85,6 @@ class ShopFragment : BaseFragment<FragmentShopBinding>() {
     override fun onDetach() {
         super.onDetach()
         updateCoinsListener = null
-        updateHealthListener = null
     }
 
     private fun openConfirmationDialog(title: String, foodItem: FoodItem) {
@@ -88,15 +93,26 @@ class ShopFragment : BaseFragment<FragmentShopBinding>() {
         ) {
             when (title) {
                 AGREE_BUY -> {
-                    viewModel.setProductToInventory(listOf(foodItem))
-                    viewModel.removeCoins(foodItem.cost)
-                    updateCoinsListener?.onUpdateCoinsBalance()
-                    inventory.value = viewModel.getProductsFromInventory()
+                    if (viewModel.isBuyProduct(foodItem.cost)) {
+                        updateCoinsListener?.onUpdateCoinsBalance()
+                        inventory.postValue(viewModel.getProductsFromInventory())
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.not_enough_money,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
                 AGREE_USE -> {
-                    viewModel.removeProductFromInventory(foodItem)
-                    updateHealthListener?.updateHealth(foodItem.healthRecovery)
-                    inventory.value = viewModel.getProductsFromInventory()
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        viewModel.removeProductFromInventory(foodItem)
+                        inventory.postValue(viewModel.getProductsFromInventory())
+                        val intent = Intent(requireContext(), HealthReceiver::class.java)
+                        intent.action = PLUS_HEALTH_INTENT
+                        intent.putExtra(PLUS_HEALTH, foodItem.healthRecovery)
+                        requireContext().sendBroadcast(intent)
+                    }
                 }
             }
         }.show(parentFragmentManager, PurchaseDialog.TAG)

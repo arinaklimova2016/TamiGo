@@ -1,12 +1,12 @@
-package com.tamigo.viewModel
+package com.tamigo.utils.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tamigo.data.Target
-import com.tamigo.managers.HealthConnectManager
-import com.tamigo.preferences.Preferences
+import com.tamigo.utils.data.Target
+import com.tamigo.utils.managers.HealthConnectManager
+import com.tamigo.utils.preferences.Preferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.ZonedDateTime
@@ -45,5 +45,4 @@ class TargetsViewModelImpl(
         if (coins != null)
             preferences.setCoinsToBalance(coins)
     }
-
 }

@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.tamigo.R
 import com.tamigo.base.BaseFragment
 import com.tamigo.base.BindingInflation
-import com.tamigo.constant.Constants.tamiList
 import com.tamigo.databinding.FragmentRegistrationBinding
 import com.tamigo.ui.adapter.TamiListAdapter
-import com.tamigo.viewModel.RegistrationViewModel
+import com.tamigo.utils.constant.Constants.tamiList
+import com.tamigo.utils.viewModel.RegistrationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>() {

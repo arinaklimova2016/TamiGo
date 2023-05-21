@@ -3,7 +3,7 @@ package com.tamigo.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.tamigo.data.Target
+import com.tamigo.utils.data.Target
 import com.tamigo.databinding.ItemTargetsBinding
 
 class TargetsAdapter(

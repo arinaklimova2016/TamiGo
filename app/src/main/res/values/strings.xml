@@ -14,9 +14,10 @@
     <string name="number_of_steps">Кількість кроків: </string>
     <string name="choose">Обрати</string>
     <string name="are_you_agree">Ви впевнені?</string>
-    <string name="warning">Якщо у вас є недосягнута мета, дані будуть втрачені.</string>
+    <string name="warning">Попередні данні будуть втрачені.</string>
     <string name="agree">Погодитися</string>
     <string name="cancel">Відхілити</string>
     <string name="inventory">Інвентар</string>
     <string name="developer">Розробник: Рудь Орина Костянтинівна\nДизайнер: Рудь Орина Костянтинівна\nВерсія додатку: 1</string>
+    <string name="not_enough_money">Не достатньо коштів</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.tamigo.interfase
+package com.tamigo.utils.interfase
 
 interface UpdateCoinsListener {
     fun onUpdateCoinsBalance()

@@ -1,4 +1,4 @@
-package com.tamigo.data
+package com.tamigo.utils.data
 
 data class FoodItem(
     val foodSrcId: Int,

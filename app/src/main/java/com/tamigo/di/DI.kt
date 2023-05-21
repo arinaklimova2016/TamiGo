@@ -4,12 +4,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.tamigo.main.MainViewModel
 import com.tamigo.main.MainViewModelImpl
-import com.tamigo.managers.HealthConnectManager
+import com.tamigo.utils.managers.HealthConnectManager
 import com.tamigo.navigation.MainRouter
 import com.tamigo.navigation.Router
-import com.tamigo.preferences.Preferences
-import com.tamigo.preferences.PreferencesImpl
-import com.tamigo.viewModel.*
+import com.tamigo.utils.preferences.Preferences
+import com.tamigo.utils.preferences.PreferencesImpl
+import com.tamigo.utils.viewModel.*
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind

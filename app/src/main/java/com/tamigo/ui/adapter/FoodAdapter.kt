@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.tamigo.data.FoodItem
+import com.tamigo.utils.data.FoodItem
 import com.tamigo.databinding.ItemFoodBinding
 import com.tamigo.databinding.ItemShopBinding
 

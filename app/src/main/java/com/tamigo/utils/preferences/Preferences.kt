@@ -1,13 +1,15 @@
-package com.tamigo.preferences
+package com.tamigo.utils.preferences
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.google.gson.Gson
 import com.tamigo.R
-import com.tamigo.data.Target
+import com.tamigo.utils.data.Target
 import java.time.ZonedDateTime
 
 interface Preferences {
+    fun registerListener(listener: SharedPreferences.OnSharedPreferenceChangeListener)
+    fun unregisterListener(listener: SharedPreferences.OnSharedPreferenceChangeListener)
     fun setTamiName(name: String)
     fun getTamiName(): String?
     fun setTamiSkin(skinResource: Int)
@@ -23,11 +25,20 @@ interface Preferences {
     fun isFirstLaunch(): Boolean
     fun setStartTargetTime(now: ZonedDateTime)
     fun getStartTargetTime(): String?
+    fun setHealth(value: Float)
+    fun getHealth(): Float
 }
 
 class PreferencesImpl(
     private val prefs: SharedPreferences
 ) : Preferences {
+    override fun registerListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
+        prefs.registerOnSharedPreferenceChangeListener(listener)
+    }
+
+    override fun unregisterListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
+        prefs.unregisterOnSharedPreferenceChangeListener(listener)
+    }
 
     override fun setTamiName(name: String) {
         prefs.edit {
@@ -105,6 +116,16 @@ class PreferencesImpl(
         return prefs.getString(START_TARGET, "")
     }
 
+    override fun setHealth(value: Float) {
+        prefs.edit {
+            putFloat(HEALTH, value)
+        }
+    }
+
+    override fun getHealth(): Float {
+        return prefs.getFloat(HEALTH, 100f)
+    }
+
     companion object {
         const val KEY = "tami_prefs"
 
@@ -115,5 +136,6 @@ class PreferencesImpl(
         const val PRODUCTS = "products_inventory"
         const val FIRST_LAUNCH = "is_first_launch"
         const val START_TARGET = "time_when_start_target"
+        const val HEALTH = "tami_health"
     }
 }

@@ -1,9 +1,9 @@
-package com.tamigo.viewModel
+package com.tamigo.utils.viewModel
 
 import androidx.lifecycle.ViewModel
 import com.tamigo.navigation.MainRouter
-import com.tamigo.preferences.Preferences
 import com.tamigo.ui.home.HomeScreen
+import com.tamigo.utils.preferences.Preferences
 
 abstract class RegistrationViewModel : ViewModel() {
     abstract fun navigateToHomeFragment()
@@ -23,5 +23,4 @@ class RegistrationViewModelImpl(
         preferences.setTamiName(name)
         preferences.setTamiSkin(skin)
     }
-
 }

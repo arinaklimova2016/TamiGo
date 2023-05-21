@@ -3,7 +3,6 @@ package com.tamigo.main
 import android.app.Application
 import com.tamigo.di.appModules
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.startKoin
 
 class TamiGoApplication : Application() {
@@ -12,7 +11,6 @@ class TamiGoApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@TamiGoApplication)
-//            workManagerFactory()
             modules(appModules)
         }
     }

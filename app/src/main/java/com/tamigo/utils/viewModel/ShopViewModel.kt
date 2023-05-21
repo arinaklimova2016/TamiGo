@@ -1,16 +1,16 @@
-package com.tamigo.viewModel
+package com.tamigo.utils.viewModel
 
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.tamigo.data.FoodItem
-import com.tamigo.preferences.Preferences
+import com.tamigo.utils.data.FoodItem
+import com.tamigo.utils.preferences.Preferences
 
 abstract class ShopViewModel : ViewModel() {
     abstract fun setProductToInventory(product: List<FoodItem>)
     abstract fun getProductsFromInventory(): List<FoodItem>?
     abstract fun removeProductFromInventory(product: FoodItem)
-    abstract fun removeCoins(cost: Int)
+    abstract fun isBuyProduct(cost: Int): Boolean
 }
 
 class ShopViewModelImpl(
@@ -43,8 +43,11 @@ class ShopViewModelImpl(
         }
     }
 
-    override fun removeCoins(cost: Int) {
-        preferences.removeCoinsFromBalance(cost)
+    override fun isBuyProduct(cost: Int): Boolean {
+        return if (preferences.getCoinsBalance() >= cost) {
+            preferences.removeCoinsFromBalance(cost)
+            true
+        } else
+            false
     }
-
 }
