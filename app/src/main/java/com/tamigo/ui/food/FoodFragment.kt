@@ -95,6 +95,7 @@ class FoodFragment : BaseFragment<FragmentShopBinding>() {
                 AGREE_BUY -> {
                     if (viewModel.isBuyProduct(foodItem.cost)) {
                         updateCoinsListener?.onUpdateCoinsBalance()
+                        viewModel.setProductToInventory(listOf(foodItem))
                         inventory.postValue(viewModel.getProductsFromInventory())
                     } else {
                         Toast.makeText(
