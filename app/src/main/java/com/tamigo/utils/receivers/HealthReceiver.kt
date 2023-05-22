@@ -61,7 +61,7 @@ class HealthReceiver : BroadcastReceiver() {
         var health = pref.getFloat(HEALTH, MAX_HEALTH).toDouble()
         health -= PROPORTION
         if (health > MIN_HEALTH) {
-            pref.edit { putInt(HEALTH, health.toInt()) }
+            pref.edit { putFloat(HEALTH, health.toFloat()) }
             setAlarm(context)
         } else {
             clearGame(context, pref)
