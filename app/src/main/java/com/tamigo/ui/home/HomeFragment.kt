@@ -26,9 +26,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (homeViewModel.isNeedStartAlarm()) {
-            HealthReceiver.setAlarm(requireContext())
-        }
         homeViewModel.registerPrefsListener()
         homeViewModel.openTargetsFragment()
         with(binding) {
@@ -45,6 +42,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             homeViewModel.health.observe(viewLifecycleOwner) {
                 progressHealth.progress = it.toInt()
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (homeViewModel.isNeedStartAlarm()) {
+            HealthReceiver.setAlarm(requireContext())
         }
     }
 
