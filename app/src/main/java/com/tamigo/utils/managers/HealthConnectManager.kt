@@ -44,6 +44,7 @@ class HealthConnectManager(
                     data = Uri.parse(HEALTH_CONNECT_URI)
                     putExtra(OVERLAY, true)
                     putExtra(CALLER_ID, context.packageName)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
             )
             return
